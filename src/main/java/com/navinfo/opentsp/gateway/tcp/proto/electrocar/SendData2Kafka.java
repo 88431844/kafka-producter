@@ -2,6 +2,9 @@ package com.navinfo.opentsp.gateway.tcp.proto.electrocar;
 
 //import com.aerozh.common.entity.*;
 //import com.aerozh.common.entity.topic.VehicleRTTopic;
+import com.navinfo.opentsp.gateway.tcp.proto.electrocar.entity.PushEventRecordEntity;
+import com.navinfo.opentsp.gateway.tcp.proto.electrocar.entity.PushPointRecordEntity;
+import com.navinfo.opentsp.gateway.tcp.proto.electrocar.entity.PushStatusRecordEntity;
 import com.navinfo.opentsp.gateway.tcp.proto.electrocar.util.Convert;
 import com.navinfo.opentsp.gateway.tcp.proto.electrocar.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +27,52 @@ public class SendData2Kafka {
     @Autowired
     private KafkaTemplate kafkaTemplate;
 
-    @Value("${kafka.topic}")
-    private String topic;
+    private String eventTopic = "localevent-event-stresstest";
+    private String pointTopic = "localevent-point-stresstest";
+    private String statusTopic = "localevent-status-stresstest";
 
-    private String vin = "test_by_gzh_888";
+    private Long eventSum = 1000L;
+    private Long pointSum = 1000L;
+    private Long statusSum = 1000L;
+
+    private Long sleepTime = 10000L;
 
     @PostConstruct
     public void sendData2Kafka() {
-        String value = "123";
-        for (int i = 0; i< 1000 ;i ++){
-            kafkaTemplate.send(topic, value + i);
+        try {
+            sendEventData();
+            sendPointData();
+            sendStatusData();
+        }catch (Exception e){
+            e.printStackTrace();
         }
+    }
+
+    private void sendEventData() throws Exception{
+        for (int i = 0; i < eventSum; i++) {
+            PushEventRecordEntity pushEventRecordEntity = new PushEventRecordEntity();
+            //TODO 补充Entity
+            kafkaTemplate.send(eventTopic, pushEventRecordEntity);
+        }
+        Thread.sleep(sleepTime);
+    }
+
+    private void sendPointData() throws Exception{
+        for (int i = 0; i < pointSum; i++) {
+            PushPointRecordEntity pushPointRecordEntity = new PushPointRecordEntity();
+            //TODO 补充Entity
+            kafkaTemplate.send(pointTopic, pushPointRecordEntity);
+        }
+        Thread.sleep(sleepTime);
+    }
+
+    private void sendStatusData() throws Exception{
+        for (int i = 0; i < statusSum; i++) {
+            PushStatusRecordEntity pushStatusRecordEntity = new PushStatusRecordEntity();
+            //TODO 补充Entity
+            kafkaTemplate.send(statusTopic, pushStatusRecordEntity);
+        }
+        Thread.sleep(sleepTime);
     }
 
 }
