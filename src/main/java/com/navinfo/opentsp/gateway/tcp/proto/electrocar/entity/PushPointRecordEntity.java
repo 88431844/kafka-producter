@@ -1,6 +1,7 @@
 package com.navinfo.opentsp.gateway.tcp.proto.electrocar.entity;
 
-import com.navinfo.opentsp.ni.localmessage.kafka.KafkaCommand;
+
+import com.navinfo.opentsp.gateway.tcp.proto.electrocar.kafka.KafkaCommand;
 
 import java.io.Serializable;
 

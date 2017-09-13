@@ -53,14 +53,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>dayun.electrocar.topic</groupId>
-			<artifactId>protocol</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/dayun-electrocar-protocol-1.0-SNAPSHOT.jar</systemPath>
-		</dependency>
-
-		<dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java</artifactId>
 			<version>2.4.1</version>

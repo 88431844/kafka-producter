@@ -1,7 +1,6 @@
 package com.navinfo.opentsp.gateway.tcp.proto.electrocar.kafka;
 
 /**
- * Created by zhangdong on 2017/6/19.
  */
 
 import org.springframework.format.annotation.DateTimeFormat;
