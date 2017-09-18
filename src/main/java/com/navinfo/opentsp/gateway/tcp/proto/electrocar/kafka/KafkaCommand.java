@@ -1,10 +1,6 @@
 package com.navinfo.opentsp.gateway.tcp.proto.electrocar.kafka;
 
-/**
- */
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
