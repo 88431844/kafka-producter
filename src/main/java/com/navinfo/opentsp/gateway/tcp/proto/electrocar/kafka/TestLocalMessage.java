@@ -24,22 +24,35 @@ public class TestLocalMessage {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+//    private String eventTopic = "localevent-event-stresstest0925";
+//    private String pointTopic = "localevent-point-stresstest0925";
+//    private String statusTopic = "localevent-status-stresstest0925";
+
+//    private String eventTopic = "localevent-event-stresstest0920";
+//    private String pointTopic = "localevent-point-stresstest0920";
+//    private String statusTopic = "localevent-status-stresstest0920";
+
     private String eventTopic = "localevent-event-stresstest";
     private String pointTopic = "localevent-point-stresstest";
     private String statusTopic = "localevent-status-stresstest";
 
-    private Long eventSum = 100 * 10000L;
-    private Long pointSum = 100 * 10000L;
-    private Long statusSum = 100 * 10000L;
+//    private Long eventSum = 2000 * 10000L;
+//    private Long pointSum = 2000 * 10000L;
+//    private Long statusSum = 2000 * 10000L;
 
-//    private Long eventSum = 10L;
-//    private Long pointSum = 10L;
-//    private Long statusSum = 10L;
+    private Long eventSum = 100L;
+    private Long pointSum = 100L;
+    private Long statusSum = 100L;
 
     private Long sleepTime = 500L;
 
-    //    private String mainDriverId = "437031bfb41b4ad796e20d45fc5794d5";
-    private String mainDriverId = "2d7206379f3741548c0d17a9999519bf";
+        private String mainDriverId = "437031bfb41b4ad796e20d45fc5794d5";
+//    private String mainDriverId = "2d7206379f3741548c0d17a9999519bf";
+
+//    private boolean eventEnable = true;
+//    private boolean pointEnable = false;
+//    private boolean statusEnable = false;
 
     private boolean eventEnable = true;
     private boolean pointEnable = true;
