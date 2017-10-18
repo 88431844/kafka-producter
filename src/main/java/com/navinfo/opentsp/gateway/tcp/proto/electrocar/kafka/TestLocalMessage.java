@@ -121,6 +121,8 @@ public class TestLocalMessage {
             entity.setTravelStatus(RandomUtil.getNum(0, 3));
             //设置管理员id
             entity.setManagerIds(RandomUtil.getManagerList(100,900,10));
+            //设置最大速度
+            entity.setMaxSpeed(RandomUtil.getNum(0,100));
             kafkaTemplate.send(eventTopic, entity.getAutoTerminalId(), JsonUtil.toJson(entity));
         }
         Thread.sleep(sleepTime);
