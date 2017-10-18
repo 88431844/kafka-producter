@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+
 /**
  * 为了测试localmessage的kakfka生产者
  */
@@ -47,11 +48,12 @@ public class TestLocalMessage {
 
     private Long sleepTime = 500L;
 
-        private String mainDriverId = "437031bfb41b4ad796e20d45fc5794d5";
+    //        private String mainDriverId = "437031bfb41b4ad796e20d45fc5794d5";
 //    private String mainDriverId = "2d7206379f3741548c0d17a9999519bf";
+    private String mainDriverId = "";
 
-//    private boolean eventEnable = true;
-//    private boolean pointEnable = false;
+//    private boolean eventEnable = false;
+//    private boolean pointEnable = true;
 //    private boolean statusEnable = false;
 
     private boolean eventEnable = true;
@@ -117,39 +119,43 @@ public class TestLocalMessage {
             entity.setDescription("Description" + i);
             entity.setDirection(RandomUtil.getNum(0, 3));
             entity.setTravelStatus(RandomUtil.getNum(0, 3));
-            kafkaTemplate.send(eventTopic, entity.getAutoTerminalId(),JsonUtil.toJson(entity));
+            //设置管理员id
+            entity.setManagerIds(RandomUtil.getManagerList(100,900,10));
+            kafkaTemplate.send(eventTopic, entity.getAutoTerminalId(), JsonUtil.toJson(entity));
         }
         Thread.sleep(sleepTime);
     }
 
     private void sendPointData() throws Exception {
         for (long i = 0; i < pointSum; i++) {
-            PushPointRecordEntity outRecord = new PushPointRecordEntity();
-            outRecord.setAutoTerminalId(String.valueOf(RandomUtil.getNum(1302872694, 549188823)));
-            outRecord.setCarId(String.valueOf(RandomUtil.getNum(12260, 82169)));
-            outRecord.setCarNumber("辽A" + RandomUtil.getNum(12345, 88888));
-            outRecord.setOwnerId("");
-            outRecord.setMainDriver(mainDriverId);
-            outRecord.setMainDriverName(RandomUtil.getChineseName());
-            outRecord.setMainDriverPhone(RandomUtil.getTel());
-            outRecord.setSubDriver("");
-            outRecord.setSubDriverName("");
-            outRecord.setSubDriverPhone("");
-            outRecord.setCityCode("0" + RandomUtil.getNum(10, 35));
-            outRecord.setCityName("沈阳");
-            outRecord.setInOut(1);
-            outRecord.setBeginTime(System.currentTimeMillis());
-            outRecord.setBeginLon(RandomUtil.getLonLat());
-            outRecord.setBeginLat(RandomUtil.getLonLat());
-            outRecord.setBeginSpeed(RandomUtil.getNum(0, 100));
-            outRecord.setStartTime(0L);
-            outRecord.setPosition(RandomUtil.getRoad());
-            outRecord.setTripLength(Double.parseDouble(String.valueOf(RandomUtil.getNum(0, 100))));
-            outRecord.setInstantOil(Double.parseDouble(String.valueOf(RandomUtil.getNum(0, 100))));
-            outRecord.setDescription("驶出");
-            outRecord.setDirection(RandomUtil.getNum(0, 3));
-            outRecord.setTravelStatus(RandomUtil.getNum(0, 3));
-            kafkaTemplate.send(pointTopic, outRecord.getAutoTerminalId(),JsonUtil.toJson(outRecord));
+            PushPointRecordEntity entity = new PushPointRecordEntity();
+            entity.setAutoTerminalId(String.valueOf(RandomUtil.getNum(1302872694, 549188823)));
+            entity.setCarId(String.valueOf(RandomUtil.getNum(12260, 82169)));
+            entity.setCarNumber("辽A" + RandomUtil.getNum(12345, 88888));
+            entity.setOwnerId("");
+            entity.setMainDriver(mainDriverId);
+            entity.setMainDriverName(RandomUtil.getChineseName());
+            entity.setMainDriverPhone(RandomUtil.getTel());
+            entity.setSubDriver("");
+            entity.setSubDriverName("");
+            entity.setSubDriverPhone("");
+            entity.setCityCode("0" + RandomUtil.getNum(10, 35));
+            entity.setCityName("沈阳");
+            entity.setInOut(1);
+            entity.setBeginTime(System.currentTimeMillis());
+            entity.setBeginLon(RandomUtil.getLonLat());
+            entity.setBeginLat(RandomUtil.getLonLat());
+            entity.setBeginSpeed(RandomUtil.getNum(0, 100));
+            entity.setStartTime(0L);
+            entity.setPosition(RandomUtil.getRoad());
+            entity.setTripLength(Double.parseDouble(String.valueOf(RandomUtil.getNum(0, 100))));
+            entity.setInstantOil(Double.parseDouble(String.valueOf(RandomUtil.getNum(0, 100))));
+            entity.setDescription("驶出");
+            entity.setDirection(RandomUtil.getNum(0, 3));
+            entity.setTravelStatus(RandomUtil.getNum(0, 3));
+            //设置管理员id
+            entity.setManagerIds(RandomUtil.getManagerList(100, 900, 10));
+            kafkaTemplate.send(pointTopic, entity.getAutoTerminalId(), JsonUtil.toJson(entity));
         }
         Thread.sleep(sleepTime);
     }
@@ -186,8 +192,9 @@ public class TestLocalMessage {
                 entity.setBeginLat(RandomUtil.getLonLat());
                 entity.setBeginSpeed(RandomUtil.getNum(0, 100));
             }
-
-            kafkaTemplate.send(statusTopic,entity.getAutoTerminalId(), JsonUtil.toJson(entity));
+            //设置管理员id
+            entity.setManagerIds(RandomUtil.getManagerList(100, 900, 10));
+            kafkaTemplate.send(statusTopic, entity.getAutoTerminalId(), JsonUtil.toJson(entity));
         }
         Thread.sleep(sleepTime);
     }
