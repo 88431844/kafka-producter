@@ -4,6 +4,7 @@ package com.navinfo.opentsp.gateway.tcp.proto.electrocar.entity;
 import com.navinfo.opentsp.gateway.tcp.proto.electrocar.kafka.KafkaCommand;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PushPointRecordEntity extends KafkaCommand implements Serializable {
     private Long id;
@@ -55,6 +56,16 @@ public class PushPointRecordEntity extends KafkaCommand implements Serializable 
     private Integer direction;
 
     private Integer travelStatus;
+
+    private List<String> managerIds;
+
+    public List<String> getManagerIds() {
+        return managerIds;
+    }
+
+    public void setManagerIds(List<String> managerIds) {
+        this.managerIds = managerIds;
+    }
 
     public Long getId() {
         return id;
