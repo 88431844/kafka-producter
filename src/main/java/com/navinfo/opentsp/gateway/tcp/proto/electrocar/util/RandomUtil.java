@@ -1,6 +1,8 @@
 package com.navinfo.opentsp.gateway.tcp.proto.electrocar.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -116,5 +118,17 @@ public class RandomUtil {
         System.out.println(RandomUtil.getNum(0, 100));
         System.out.println(RandomUtil.getRoad());
         System.out.println(RandomUtil.getTel());
+    }
+
+    /**
+     * 创建随机id，并返回List<String>
+     * @return
+     */
+    public static List<String> getManagerList(int start,int end,int sum){
+        List<String> managerIds = new ArrayList<>();
+        for (int j = 0; j < sum; j++) {
+            managerIds.add(String.valueOf(RandomUtil.getNum(start, end)));
+        }
+        return managerIds;
     }
 }
