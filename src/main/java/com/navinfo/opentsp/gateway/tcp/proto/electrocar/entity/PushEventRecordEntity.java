@@ -39,6 +39,8 @@ public class PushEventRecordEntity extends KafkaCommand implements Serializable 
 
     private Integer beginSpeed;
 
+    private Integer maxSpeed;
+
     private Double instantOil;
 
     private Double differOil;
@@ -245,5 +247,13 @@ public class PushEventRecordEntity extends KafkaCommand implements Serializable 
 
     public void setAutoTerminalId(String autoTerminalId) {
         this.autoTerminalId = autoTerminalId;
+    }
+
+    public Integer getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(Integer maxSpeed) {
+        this.maxSpeed = maxSpeed;
     }
 }
