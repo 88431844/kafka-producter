@@ -34,23 +34,31 @@ public class TestLocalMessage {
 //    private String pointTopic = "localevent-point-stresstest0920";
 //    private String statusTopic = "localevent-status-stresstest0920";
 
-    private String eventTopic = "localevent-event-stresstest";
-    private String pointTopic = "localevent-point-stresstest";
-    private String statusTopic = "localevent-status-stresstest";
+//    private String eventTopic = "localevent-event-stresstest";
+//    private String pointTopic = "localevent-point-stresstest";
+//    private String statusTopic = "localevent-status-stresstest";
+
+    private String eventTopic = "localevent-event-test";
+    private String pointTopic = "localevent-point-test";
+    private String statusTopic = "localevent-status-test";
 
 //    private Long eventSum = 2000 * 10000L;
 //    private Long pointSum = 2000 * 10000L;
 //    private Long statusSum = 2000 * 10000L;
 
-    private Long eventSum = 100L;
-    private Long pointSum = 100L;
-    private Long statusSum = 100L;
+//    private Long eventSum = 100L;
+//    private Long pointSum = 100L;
+//    private Long statusSum = 100L;
+
+    private Long eventSum = 1L;
+    private Long pointSum = 1L;
+    private Long statusSum = 1L;
 
     private Long sleepTime = 500L;
 
     //        private String mainDriverId = "437031bfb41b4ad796e20d45fc5794d5";
-//    private String mainDriverId = "2d7206379f3741548c0d17a9999519bf";
-    private String mainDriverId = "";
+    private String mainDriverId = "2d7206379f3741548c0d17a9999519bf";
+//    private String mainDriverId = "";
 
 //    private boolean eventEnable = false;
 //    private boolean pointEnable = true;
@@ -59,6 +67,10 @@ public class TestLocalMessage {
     private boolean eventEnable = true;
     private boolean pointEnable = true;
     private boolean statusEnable = true;
+
+//    private boolean eventEnable = true;
+//    private boolean pointEnable = false;
+//    private boolean statusEnable = false;
 
     @PostConstruct
     public void sendData2Kafka() {
