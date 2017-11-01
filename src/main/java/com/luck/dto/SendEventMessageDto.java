@@ -2,39 +2,38 @@ package com.luck.dto;
 
 /**
  * @Author miracle
- * @Date 2017/11/1 0001 14:59
+ * @Date 2017/11/1 0001 14:06
  */
-public class SendStatusDto {
-
-    private Long statusSum = 1L;
-    private String statusTopic = "localevent-status-test";
+public class SendEventMessageDto {
+    private Long eventSum = 1L;
+    private String eventTopic = "localevent-event-test";
     private Long sleepTime = 500L;
     private String mainDriverId = "2d7206379f3741548c0d17a9999519bf";
 
     @Override
     public String toString() {
-        return "SendStatusDto{" +
-                "statusSum=" + statusSum +
-                ", statusTopic='" + statusTopic + '\'' +
+        return "SendEventDto{" +
+                "eventSum=" + eventSum +
+                ", eventTopic='" + eventTopic + '\'' +
                 ", sleepTime=" + sleepTime +
                 ", mainDriverId='" + mainDriverId + '\'' +
                 '}';
     }
 
-    public Long getStatusSum() {
-        return statusSum;
+    public Long getEventSum() {
+        return eventSum;
     }
 
-    public void setStatusSum(Long statusSum) {
-        this.statusSum = statusSum;
+    public void setEventSum(Long eventSum) {
+        this.eventSum = eventSum;
     }
 
-    public String getStatusTopic() {
-        return statusTopic;
+    public String getEventTopic() {
+        return eventTopic;
     }
 
-    public void setStatusTopic(String statusTopic) {
-        this.statusTopic = statusTopic;
+    public void setEventTopic(String eventTopic) {
+        this.eventTopic = eventTopic;
     }
 
     public Long getSleepTime() {

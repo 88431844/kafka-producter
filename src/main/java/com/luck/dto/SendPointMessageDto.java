@@ -4,7 +4,7 @@ package com.luck.dto;
  * @Author miracle
  * @Date 2017/11/1 0001 14:55
  */
-public class SendPointDto {
+public class SendPointMessageDto {
     private Long pointSum = 1L;
     private String pointTopic = "localevent-point-test";
     private Long sleepTime = 500L;
