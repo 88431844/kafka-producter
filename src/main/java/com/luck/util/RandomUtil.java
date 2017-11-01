@@ -1,9 +1,6 @@
 package com.luck.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 随机生成中文姓名，性别，Email，手机号，住址
@@ -110,6 +107,15 @@ public class RandomUtil {
      */
     public static Double getLonLat(){
         return Double.parseDouble(String.valueOf(RandomUtil.getNum(1,100))+String.valueOf(RandomUtil.getNum(177212272,572012272)));
+    }
+
+    /**
+     * 随机返回true 和 false
+     * @return
+     */
+    public static boolean getBoolean(){
+        Random random = new Random();
+        return random.nextBoolean();
     }
     public static void main(String[] args) {
         System.out.println(RandomUtil.getAddress());

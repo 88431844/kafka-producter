@@ -97,6 +97,13 @@
 			<!--<artifactId>tomcat-embed-websocket</artifactId>-->
 			<!--<version>8.0.28</version>-->
 		<!--</dependency>-->
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-redis -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.8.3.RELEASE</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
