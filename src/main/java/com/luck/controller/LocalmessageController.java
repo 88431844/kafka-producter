@@ -31,7 +31,7 @@ public class LocalmessageController {
      */
     @RequestMapping("/batchLocalmessage")
     @ResponseBody
-    public void batchLocalmessage(BatchLocalmessageDto batchLocalmessageDto){
+    public void batchLocalmessage(@RequestBody BatchLocalmessageDto batchLocalmessageDto){
         logger.info("batchLocalmessage reqeust parm :{}",batchLocalmessageDto.toString());
         try {
             testLocalMessageService.setEventTopic(batchLocalmessageDto.getEventTopic());
