@@ -25,101 +25,62 @@ public class TestLocalEventService {
 
     @Autowired
     private KafkaTemplate kafkaTemplate;
-//    @Autowired
-//    private StringRedisTemplate redisTemplate;
 
-    private static final String QINGQI_COMMAND = "3002";
+    private String QINGQI_COMMAND;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private String topic;
+
+    private String terminalId;
+
+    private Integer speed;
+
     /**
-     * 推送超速
+     * 纬度
      */
-    private boolean enableSpeed = true;
-//    private boolean enableSpeed = false;
+    private Integer longitude;
     /**
-     * 推送关键点出入
+     * 经度
      */
-//    private boolean enablePoint = true;
-    private boolean enablePoint = false;
+    private Integer latitude;
+
     /**
-     * 推送车况
+     * 推送localevent 超速报警
      */
-//    private boolean enableStatus = true;
-    private boolean enableStatus = false;
-
-    private String topic = "jfz_ZHposcan_pkt";
-
-    private String terminalId = "14807431717";
-
-
-    public void sendData2Kafka() throws Exception {
-        logger.info("====================start send to localevent====================");
-        long s = System.currentTimeMillis();
-        if (enableSpeed) {
-            for (int i = 0; i < 10; i++) {
-                sendSpeed();
-            }
-        }
-
-        if (enablePoint) {
-            sendPoint();
-        }
-
-        if (enableStatus) {
-            sendStatus();
-        }
-        long e = System.currentTimeMillis();
-        logger.info("====================end  send to localevent=====cost time :{}===============", (e - s));
-    }
-
-    private void sendSpeed() {
+    public void sendSpeed() throws Exception{
         //创建pb
         LCLocationData.LocationData.Builder builder = LCLocationData.LocationData.newBuilder();
         //必填数据赋值
         builder = getNeedPb(builder);
-        builder.setSpeed(RandomUtil.getNum(100,200));
+        builder.setSpeed(speed);
         LCLocationData.LocationData taLocationData = builder.build();
         //发送消息到kafka
         send2Kafka(taLocationData,terminalId);
     }
+    /**
+     * 推送localevent 关键点出入
+     */
+    public void sendPoint() throws Exception{
 
-    private void sendPoint() throws Exception{
-        //沈阳经纬度 纬度（Longitude）：41.6771800000,经度（Latitude）：123.4631000000
-        //大连经纬度 纬度（Longitude）：38.9136900000,经度（Latitude）：121.6147600000
-        //滨州经纬度 纬度（Longitude）：37.3821100000,经度（Latitude）：117.9727900000
-        //成都经纬度 纬度（Longitude）：30.5702000000,经度（Latitude）：104.0647600000
-
-//        Set<Object> carList = redisTemplate.boundHashOps("car_sync").keys();
-//        for (Object o : carList){
-//            System.out.println(o.toString());
-//        }
 
         //创建pb
         LCLocationData.LocationData.Builder builder = LCLocationData.LocationData.newBuilder();
         //必填数据赋值
         builder = getNeedPb(builder);
 
-        //随机设置沈阳 大连经纬度(去掉小数点保留小数点后六位)
-        if (RandomUtil.getBoolean()){
-            //true 为设置沈阳经纬度
-            builder.setLongitude(41677180);
-            builder.setLatitude(123463100);
-            logger.info("---------沈阳经纬度");
-        }else{
-            //false 为设置大连经纬度
-            builder.setLongitude(38913690);
-            builder.setLatitude(121614760);
-            logger.info("---------大连经纬度");
-        }
+        builder.setLongitude(longitude);
+        builder.setLatitude(latitude);
 
         LCLocationData.LocationData taLocationData = builder.build();
         //发送消息到kafka
         send2Kafka(taLocationData,terminalId);
 
     }
-
-    private void sendStatus() {
+    /**
+     * 推送localevent 车况
+     */
+    public void sendStatus() throws Exception{
 
     }
 
@@ -160,5 +121,53 @@ public class TestLocalEventService {
             logger.error("send2Kafka error");
             e.printStackTrace();
         }
+    }
+
+    public String getQINGQI_COMMAND() {
+        return QINGQI_COMMAND;
+    }
+
+    public void setQINGQI_COMMAND(String QINGQI_COMMAND) {
+        this.QINGQI_COMMAND = QINGQI_COMMAND;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getTerminalId() {
+        return terminalId;
+    }
+
+    public void setTerminalId(String terminalId) {
+        this.terminalId = terminalId;
+    }
+
+    public Integer getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Integer speed) {
+        this.speed = speed;
+    }
+
+    public Integer getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Integer longitude) {
+        this.longitude = longitude;
+    }
+
+    public Integer getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Integer latitude) {
+        this.latitude = latitude;
     }
 }

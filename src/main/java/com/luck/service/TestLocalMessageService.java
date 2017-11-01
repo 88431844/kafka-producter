@@ -23,64 +23,17 @@ public class TestLocalMessageService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-//    private String eventTopic = "localevent-event-stresstest0925";
-//    private String pointTopic = "localevent-point-stresstest0925";
-//    private String statusTopic = "localevent-status-stresstest0925";
-
-//    private String eventTopic = "localevent-event-stresstest0920";
-//    private String pointTopic = "localevent-point-stresstest0920";
-//    private String statusTopic = "localevent-status-stresstest0920";
-
-//    private String eventTopic = "localevent-event-stresstest";
-//    private String pointTopic = "localevent-point-stresstest";
-//    private String statusTopic = "localevent-status-stresstest";
-
-//    private String eventTopic = "localevent-event-test";
-//    private String pointTopic = "localevent-point-test";
-//    private String statusTopic = "localevent-status-test";
-
     private String eventTopic;
     private String pointTopic;
     private String statusTopic;
 
-//    private Long eventSum = 2000 * 10000L;
-//    private Long pointSum = 2000 * 10000L;
-//    private Long statusSum = 2000 * 10000L;
-
-//    private Long eventSum = 100L;
-//    private Long pointSum = 100L;
-//    private Long statusSum = 100L;
-
-//    private Long eventSum = 1L;
-//    private Long pointSum = 1L;
-//    private Long statusSum = 1L;
     private Long eventSum;
     private Long pointSum;
     private Long statusSum;
 
-//    private Long sleepTime = 500L;
     private Long sleepTime;
 
-    //        private String mainDriverId = "437031bfb41b4ad796e20d45fc5794d5";
-//    private String mainDriverId = "2d7206379f3741548c0d17a9999519bf";
     private String mainDriverId;
-//    private String mainDriverId = "";
-
-//    private boolean eventEnable = false;
-//    private boolean pointEnable = true;
-//    private boolean statusEnable = false;
-
-//    private boolean eventEnable = true;
-//    private boolean pointEnable = true;
-//    private boolean statusEnable = true;
-
-//    private boolean eventEnable = true;
-//    private boolean pointEnable = false;
-//    private boolean statusEnable = false;
-
-//    private boolean eventEnable = false;
-//    private boolean pointEnable = false;
-//    private boolean statusEnable = true;
 
     private boolean eventEnable;
     private boolean pointEnable;
@@ -89,7 +42,7 @@ public class TestLocalMessageService {
     private boolean batch = false;
 
     /**
-     * 批量推送告警、关键点出入、车况
+     * 批量推送 localmessage 告警、关键点出入、车况
      */
     public void batchLocalmessage() {
         try {
@@ -123,7 +76,7 @@ public class TestLocalMessageService {
     }
 
     /**
-     * 发送告警到kafka
+     * 推送localmessage 告警
      * @throws Exception
      */
     public void sendEventData() throws Exception {
@@ -166,7 +119,7 @@ public class TestLocalMessageService {
     }
 
     /**
-     * 发送关键点到kafka
+     * 推送localmessage 关键点出入
      * @throws Exception
      */
     public void sendPointData() throws Exception {
@@ -207,7 +160,7 @@ public class TestLocalMessageService {
     }
 
     /**
-     * 发送车况到kafka
+     * 推送localmessage 车况
      * @throws Exception
      */
     public void sendStatusData() throws Exception {

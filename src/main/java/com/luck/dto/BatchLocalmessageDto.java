@@ -4,7 +4,7 @@ package com.luck.dto;
  * @Author miracle
  * @Date 2017/11/1 0001 14:19
  */
-public class BatchLocalmessageDto {
+public class BatchLocalmessageDto extends MessageBaseDto{
 
     private String eventTopic = "localevent-event-test";
     private String pointTopic = "localevent-point-test";
@@ -13,10 +13,6 @@ public class BatchLocalmessageDto {
     private Long eventSum = 1L;
     private Long pointSum = 1L;
     private Long statusSum = 1L;
-
-    private Long sleepTime = 500L;
-
-    private String mainDriverId = "2d7206379f3741548c0d17a9999519bf";
 
     private boolean eventEnable = false;
     private boolean pointEnable = false;
@@ -33,12 +29,11 @@ public class BatchLocalmessageDto {
                 ", eventSum=" + eventSum +
                 ", pointSum=" + pointSum +
                 ", statusSum=" + statusSum +
-                ", sleepTime=" + sleepTime +
-                ", mainDriverId='" + mainDriverId + '\'' +
                 ", eventEnable=" + eventEnable +
                 ", pointEnable=" + pointEnable +
                 ", statusEnable=" + statusEnable +
                 ", batch=" + batch +
+                super.toString() +
                 '}';
     }
 
@@ -88,22 +83,6 @@ public class BatchLocalmessageDto {
 
     public void setStatusSum(Long statusSum) {
         this.statusSum = statusSum;
-    }
-
-    public Long getSleepTime() {
-        return sleepTime;
-    }
-
-    public void setSleepTime(Long sleepTime) {
-        this.sleepTime = sleepTime;
-    }
-
-    public String getMainDriverId() {
-        return mainDriverId;
-    }
-
-    public void setMainDriverId(String mainDriverId) {
-        this.mainDriverId = mainDriverId;
     }
 
     public boolean isEventEnable() {

@@ -1,10 +1,8 @@
 package com.luck.controller;
 
-import com.luck.dto.BatchLocalmessageDto;
-import com.luck.dto.SendEventMessageDto;
-import com.luck.dto.SendPointMessageDto;
-import com.luck.dto.SendStatusMessageDto;
+import com.luck.dto.*;
 import com.luck.service.TestLocalMessageService;
+import com.luck.util.Const;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +29,9 @@ public class LocalmessageController {
      */
     @RequestMapping("/batchLocalmessage")
     @ResponseBody
-    public void batchLocalmessage(@RequestBody BatchLocalmessageDto batchLocalmessageDto){
-        logger.info("batchLocalmessage reqeust parm :{}",batchLocalmessageDto.toString());
+    public CommonRespondDto batchLocalmessage(@RequestBody BatchLocalmessageDto batchLocalmessageDto){
+        CommonRespondDto commonRespondDto = new CommonRespondDto();
+        logger.info("LocalmessageController batchLocalmessage reqeust parm :{}",batchLocalmessageDto.toString());
         try {
             testLocalMessageService.setEventTopic(batchLocalmessageDto.getEventTopic());
             testLocalMessageService.setPointTopic(batchLocalmessageDto.getPointTopic());
@@ -53,10 +52,16 @@ public class LocalmessageController {
             testLocalMessageService.setBatch(batchLocalmessageDto.isBatch());
 
             testLocalMessageService.batchLocalmessage();
+            commonRespondDto.setCode(Const.SUCCESS_CODE);
+            commonRespondDto.setMsg(Const.SUCCESS_MSG);
         }catch (Exception e){
-            logger.error("LocalmessageController batchLocalmessage error");
+            commonRespondDto.setCode(Const.FAIL_CODE);
+            commonRespondDto.setMsg(Const.FAIL_MSG);
+            logger.error("LocalmessageController LocalmessageController batchLocalmessage error");
             e.printStackTrace();
+            return commonRespondDto;
         }
+        return commonRespondDto;
     }
 
     /**
@@ -65,8 +70,9 @@ public class LocalmessageController {
      */
     @RequestMapping("/sendEventData")
     @ResponseBody
-    public void sendEventData(@RequestBody SendEventMessageDto sendEventDto){
-        logger.info("sendEventData reqeust parm :{}",sendEventDto.toString());
+    public CommonRespondDto sendEventData(@RequestBody SendEventMessageDto sendEventDto){
+        CommonRespondDto commonRespondDto = new CommonRespondDto();
+        logger.info("LocalmessageController sendEventData reqeust parm :{}",sendEventDto.toString());
         try {
             testLocalMessageService.setEventSum(sendEventDto.getEventSum());
             testLocalMessageService.setEventTopic(sendEventDto.getEventTopic());
@@ -74,10 +80,16 @@ public class LocalmessageController {
             testLocalMessageService.setMainDriverId(sendEventDto.getMainDriverId());
 
             testLocalMessageService.sendEventData();
+            commonRespondDto.setCode(Const.SUCCESS_CODE);
+            commonRespondDto.setMsg(Const.SUCCESS_MSG);
         }catch (Exception e){
-            logger.error("LocalmessageController sendEventData error");
+            commonRespondDto.setCode(Const.FAIL_CODE);
+            commonRespondDto.setMsg(Const.FAIL_MSG);
+            logger.error("LocalmessageController LocalmessageController sendEventData error");
             e.printStackTrace();
+            return commonRespondDto;
         }
+        return commonRespondDto;
     }
 
     /**
@@ -86,8 +98,9 @@ public class LocalmessageController {
      */
     @RequestMapping("/sendPointData")
     @ResponseBody
-    public void sendPointData(@RequestBody SendPointMessageDto sendPointDto){
-        logger.info("sendPointData reqeust parm :{}",sendPointDto.toString());
+    public CommonRespondDto sendPointData(@RequestBody SendPointMessageDto sendPointDto){
+        CommonRespondDto commonRespondDto = new CommonRespondDto();
+        logger.info("LocalmessageController sendPointData reqeust parm :{}",sendPointDto.toString());
         try {
             testLocalMessageService.setPointSum(sendPointDto.getPointSum());
             testLocalMessageService.setPointTopic(sendPointDto.getPointTopic());
@@ -95,10 +108,16 @@ public class LocalmessageController {
             testLocalMessageService.setMainDriverId(sendPointDto.getMainDriverId());
 
             testLocalMessageService.sendPointData();
+            commonRespondDto.setCode(Const.SUCCESS_CODE);
+            commonRespondDto.setMsg(Const.SUCCESS_MSG);
         }catch (Exception e){
-            logger.error("LocalmessageController sendPointData error");
+            commonRespondDto.setCode(Const.FAIL_CODE);
+            commonRespondDto.setMsg(Const.FAIL_MSG);
+            logger.error("LocalmessageController LocalmessageController sendPointData error");
             e.printStackTrace();
+            return commonRespondDto;
         }
+        return commonRespondDto;
     }
 
     /**
@@ -107,8 +126,9 @@ public class LocalmessageController {
      */
     @RequestMapping("/sendStatusData")
     @ResponseBody
-    public void sendStatusData(@RequestBody SendStatusMessageDto sendStatusDto){
-        logger.info("sendStatusData reqeust parm :{}",sendStatusDto.toString());
+    public CommonRespondDto sendStatusData(@RequestBody SendStatusMessageDto sendStatusDto){
+        CommonRespondDto commonRespondDto = new CommonRespondDto();
+        logger.info("LocalmessageController sendStatusData reqeust parm :{}",sendStatusDto.toString());
         try {
             testLocalMessageService.setStatusSum(sendStatusDto.getStatusSum());
             testLocalMessageService.setStatusTopic(sendStatusDto.getStatusTopic());
@@ -116,9 +136,15 @@ public class LocalmessageController {
             testLocalMessageService.setMainDriverId(sendStatusDto.getMainDriverId());
 
             testLocalMessageService.sendStatusData();
+            commonRespondDto.setCode(Const.SUCCESS_CODE);
+            commonRespondDto.setMsg(Const.SUCCESS_MSG);
         }catch (Exception e){
-            logger.error("LocalmessageController sendStatusData error");
+            commonRespondDto.setCode(Const.FAIL_CODE);
+            commonRespondDto.setMsg(Const.FAIL_MSG);
+            logger.error("LocalmessageController LocalmessageController sendStatusData error");
             e.printStackTrace();
+            return commonRespondDto;
         }
+        return commonRespondDto;
     }
 }
