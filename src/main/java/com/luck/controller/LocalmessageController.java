@@ -1,9 +1,9 @@
 package com.luck.controller;
 
 import com.luck.dto.BatchLocalmessageDto;
-import com.luck.dto.SendEventDto;
-import com.luck.dto.SendPointDto;
-import com.luck.dto.SendStatusDto;
+import com.luck.dto.SendEventMessageDto;
+import com.luck.dto.SendPointMessageDto;
+import com.luck.dto.SendStatusMessageDto;
 import com.luck.service.TestLocalMessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +65,7 @@ public class LocalmessageController {
      */
     @RequestMapping("/sendEventData")
     @ResponseBody
-    public void sendEventData(@RequestBody SendEventDto sendEventDto){
+    public void sendEventData(@RequestBody SendEventMessageDto sendEventDto){
         logger.info("sendEventData reqeust parm :{}",sendEventDto.toString());
         try {
             testLocalMessageService.setEventSum(sendEventDto.getEventSum());
@@ -86,7 +86,7 @@ public class LocalmessageController {
      */
     @RequestMapping("/sendPointData")
     @ResponseBody
-    public void sendPointData(@RequestBody SendPointDto sendPointDto){
+    public void sendPointData(@RequestBody SendPointMessageDto sendPointDto){
         logger.info("sendPointData reqeust parm :{}",sendPointDto.toString());
         try {
             testLocalMessageService.setPointSum(sendPointDto.getPointSum());
@@ -107,7 +107,7 @@ public class LocalmessageController {
      */
     @RequestMapping("/sendStatusData")
     @ResponseBody
-    public void sendStatusData(@RequestBody SendStatusDto sendStatusDto){
+    public void sendStatusData(@RequestBody SendStatusMessageDto sendStatusDto){
         logger.info("sendStatusData reqeust parm :{}",sendStatusDto.toString());
         try {
             testLocalMessageService.setStatusSum(sendStatusDto.getStatusSum());
