@@ -31,7 +31,7 @@ public class LocalmessageController {
     @ResponseBody
     public CommonRespondDto batchLocalmessage(@RequestBody BatchLocalmessageDto batchLocalmessageDto){
         CommonRespondDto commonRespondDto = new CommonRespondDto();
-        logger.info("LocalmessageController batchLocalmessage reqeust parm :{}",batchLocalmessageDto.toString());
+        logger.info("LocalmessageController batchLocalmessage request parm :{}",batchLocalmessageDto.toString());
         try {
             testLocalMessageService.setEventTopic(batchLocalmessageDto.getEventTopic());
             testLocalMessageService.setPointTopic(batchLocalmessageDto.getPointTopic());
@@ -72,7 +72,7 @@ public class LocalmessageController {
     @ResponseBody
     public CommonRespondDto sendEventData(@RequestBody SendEventMessageDto sendEventDto){
         CommonRespondDto commonRespondDto = new CommonRespondDto();
-        logger.info("LocalmessageController sendEventData reqeust parm :{}",sendEventDto.toString());
+        logger.info("LocalmessageController sendEventData request parm :{}",sendEventDto.toString());
         try {
             testLocalMessageService.setEventSum(sendEventDto.getEventSum());
             testLocalMessageService.setEventTopic(sendEventDto.getEventTopic());
@@ -100,7 +100,7 @@ public class LocalmessageController {
     @ResponseBody
     public CommonRespondDto sendPointData(@RequestBody SendPointMessageDto sendPointDto){
         CommonRespondDto commonRespondDto = new CommonRespondDto();
-        logger.info("LocalmessageController sendPointData reqeust parm :{}",sendPointDto.toString());
+        logger.info("LocalmessageController sendPointData request parm :{}",sendPointDto.toString());
         try {
             testLocalMessageService.setPointSum(sendPointDto.getPointSum());
             testLocalMessageService.setPointTopic(sendPointDto.getPointTopic());
@@ -128,7 +128,7 @@ public class LocalmessageController {
     @ResponseBody
     public CommonRespondDto sendStatusData(@RequestBody SendStatusMessageDto sendStatusDto){
         CommonRespondDto commonRespondDto = new CommonRespondDto();
-        logger.info("LocalmessageController sendStatusData reqeust parm :{}",sendStatusDto.toString());
+        logger.info("LocalmessageController sendStatusData request parm :{}",sendStatusDto.toString());
         try {
             testLocalMessageService.setStatusSum(sendStatusDto.getStatusSum());
             testLocalMessageService.setStatusTopic(sendStatusDto.getStatusTopic());
