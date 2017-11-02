@@ -2,7 +2,6 @@ package com.luck.service;
 
 import com.google.protobuf.ByteString;
 import com.luck.util.JsonUtil;
-import com.luck.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,7 @@ import org.springframework.stereotype.Service;
 import com.lc.core.protocol.common.LCLocationData;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @Author miracle
@@ -45,6 +42,17 @@ public class TestLocalEventService {
      */
     private Integer latitude;
 
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    private static final String REDIS_CAR_STATUS_KEY = "car_status";
+
+    /**
+     * 车况中 车辆状态
+     * 1：启动状态
+     * 0：真正熄火状态
+     */
+    private String carStatus;
     /**
      * 推送localevent 超速报警
      */
@@ -57,31 +65,44 @@ public class TestLocalEventService {
         LCLocationData.LocationData taLocationData = builder.build();
         //发送消息到kafka
         send2Kafka(taLocationData,terminalId);
+        logger.info("TestLocalEventService sendSpeed ..............:{}",System.currentTimeMillis());
     }
     /**
      * 推送localevent 关键点出入
      */
     public void sendPoint() throws Exception{
-
-
         //创建pb
         LCLocationData.LocationData.Builder builder = LCLocationData.LocationData.newBuilder();
         //必填数据赋值
         builder = getNeedPb(builder);
 
-        builder.setLongitude(longitude);
-        builder.setLatitude(latitude);
+//        builder.setLongitude(longitude);
+//        builder.setLatitude(latitude);
+
+        builder.setOriginalLng(longitude);
+        builder.setOriginalLat(latitude);
 
         LCLocationData.LocationData taLocationData = builder.build();
         //发送消息到kafka
         send2Kafka(taLocationData,terminalId);
+        logger.info("TestLocalEventService sendPoint ..............:{}", System.currentTimeMillis());
 
     }
     /**
      * 推送localevent 车况
      */
     public void sendStatus() throws Exception{
-
+        //创建pb
+        LCLocationData.LocationData.Builder builder = LCLocationData.LocationData.newBuilder();
+        //必填数据赋值
+        builder = getNeedPb(builder);
+        builder.setStatus(Long.parseLong(carStatus));
+        builder.setSpeed(speed);
+        LCLocationData.LocationData taLocationData = builder.build();
+//        redisTemplate.opsForHash().put(REDIS_CAR_STATUS_KEY, terminalId, carStatus);
+        //发送消息到kafka
+        send2Kafka(taLocationData,terminalId);
+        logger.info("TestLocalEventService sendStatus ..............:{}", System.currentTimeMillis());
     }
 
     /**
@@ -169,5 +190,13 @@ public class TestLocalEventService {
 
     public void setLatitude(Integer latitude) {
         this.latitude = latitude;
+    }
+
+    public String getCarStatus() {
+        return carStatus;
+    }
+
+    public void setCarStatus(String carStatus) {
+        this.carStatus = carStatus;
     }
 }
