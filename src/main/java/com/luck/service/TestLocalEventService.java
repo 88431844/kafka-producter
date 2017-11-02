@@ -5,7 +5,6 @@ import com.luck.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import com.lc.core.protocol.common.LCLocationData;
@@ -42,11 +41,6 @@ public class TestLocalEventService {
      */
     private Integer latitude;
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
-
-    private static final String REDIS_CAR_STATUS_KEY = "car_status";
-
     /**
      * 车况中 车辆状态
      * 1：启动状态
@@ -76,9 +70,6 @@ public class TestLocalEventService {
         //必填数据赋值
         builder = getNeedPb(builder);
 
-//        builder.setLongitude(longitude);
-//        builder.setLatitude(latitude);
-
         builder.setOriginalLng(longitude);
         builder.setOriginalLat(latitude);
 
@@ -99,7 +90,6 @@ public class TestLocalEventService {
         builder.setStatus(Long.parseLong(carStatus));
         builder.setSpeed(speed);
         LCLocationData.LocationData taLocationData = builder.build();
-//        redisTemplate.opsForHash().put(REDIS_CAR_STATUS_KEY, terminalId, carStatus);
         //发送消息到kafka
         send2Kafka(taLocationData,terminalId);
         logger.info("TestLocalEventService sendStatus ..............:{}", System.currentTimeMillis());
