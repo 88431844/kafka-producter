@@ -11,10 +11,12 @@ public final class ArraysUtils {
 	 * @return
 	 */
 	public final static byte[] arraycopy(final byte[] begin, final byte[] end) {
-		if (begin == null)
+		if (begin == null){
 			return end;
-		if (end == null)
+		}
+		if (end == null){
 			return begin;
+		}
 		int length = begin.length + end.length;
 		byte[] result = new byte[length];
 		System.arraycopy(begin, 0, result, 0, begin.length);
@@ -32,9 +34,10 @@ public final class ArraysUtils {
 	 */
 	public final static byte[] arrayappend(final byte[] source,
 			int sourceIndex, final byte[] end) {
-		if (end.length + sourceIndex > source.length)
+		if (end.length + sourceIndex > source.length){
 			throw new IndexOutOfBoundsException("length = " + source.length
 					+ " , total length = " + (sourceIndex + end.length));
+		}
 		System.arraycopy(end, 0, source, sourceIndex, end.length);
 		return source;
 	}
@@ -86,8 +89,9 @@ public final class ArraysUtils {
 
 	public static final int indexOf(byte b, byte[] bytes) {
 		for (int i = 0, length = bytes.length; i < length; i++) {
-			if (b == bytes[i])
+			if (b == bytes[i]){
 				return i;
+			}
 		}
 		return -1;
 	}

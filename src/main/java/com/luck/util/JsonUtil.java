@@ -28,8 +28,9 @@ public class JsonUtil {
 		return toJson(obj, mapper);
 	}
 	private static String toJson(Object obj, ObjectMapper objectMapper) throws JsonProcessingException {
-		if(obj == null)
+		if(obj == null){
 			return null;
+		}
 		return objectMapper.writeValueAsString(obj);
 	}
 
@@ -52,9 +53,9 @@ public class JsonUtil {
 	}
 
 	public static <T> T fromJson(InputStream is, Class<T> clazz){
-		if(is == null)
+		 if(is == null){
 			return null;
-
+		}
 		T t = null;
 		try {
 			t = mapper.readValue(is, clazz);
@@ -65,9 +66,9 @@ public class JsonUtil {
 	}
 
 	public static <T> T fromJson(byte[] src, Class<T> clazz){
-		if(src == null)
+		if(src == null){
 			return null;
-
+		}
 		T t = null;
 		try {
 			t = mapper.readValue(src, clazz);

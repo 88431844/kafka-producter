@@ -136,7 +136,7 @@ public class DateUtil {
      * @return Timestamp
      */
     public static Timestamp getTimestamp() {
-        return new Timestamp(new Date().getTime());
+        return new Timestamp(System.currentTimeMillis());
     }
 
     /**
@@ -187,11 +187,11 @@ public class DateUtil {
         return convert(calendar.getTime());
     }
 
-    /*
+    /**
      * 获得从现在开始步进<b>周</b>数后的日期，如-1则上周、2则下下周，以此类推
      * @param date
      * @param amount
-     * @return java.sql.Date
+     * @return
      */
     public static java.sql.Date stepWeekOfMonth(Date date, int amount) {
         Calendar calendar = Calendar.getInstance();
@@ -405,9 +405,9 @@ public class DateUtil {
      * @return
      */
     public static String addTimeLimit(int timelimit, String date) {
-        Calendar current_calendar = DateUtil.stringformatToCalendar(date);
-        current_calendar.add(Calendar.DAY_OF_MONTH, timelimit);
-        return DateUtil.convertCalendar(current_calendar);
+        Calendar currentCalendar = DateUtil.stringformatToCalendar(date);
+        currentCalendar.add(Calendar.DAY_OF_MONTH, timelimit);
+        return DateUtil.convertCalendar(currentCalendar);
     }
 
     /**
@@ -463,12 +463,12 @@ public class DateUtil {
     }
 
 
-    public static int Hour(Date time) {
+    public static int hour(Date time) {
         SimpleDateFormat st = new SimpleDateFormat("yyyyMMddHH");
         return Integer.parseInt(st.format(time));
     }
 
-    public static Date StringToDate(String s) {
+    public static Date stringToDate(String s) {
         Date time = new Date();
         SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -499,7 +499,6 @@ public class DateUtil {
         StringBuffer sb = new StringBuffer("");
         long temp = calEnd.getTimeInMillis() - calBegin.getTimeInMillis();
         if (86400000 < temp) {
-            //sb.append((temp/86400000) + "天");
             temp = temp % 86400000;
         }
         if (3600000 < temp) {

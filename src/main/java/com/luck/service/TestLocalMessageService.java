@@ -180,16 +180,26 @@ public class TestLocalMessageService {
 
             int tripFlag = RandomUtil.getNum(0, 1);
 
-            entity.setType(RandomUtil.getNum(0, 1));//0 行程开始
+            /**
+             * 0 行程开始
+             */
+            entity.setType(RandomUtil.getNum(0, 1));
             entity.setDirection(0);
             int travelStatus = RandomUtil.getNum(0, 2);
             entity.setTravelStatus(travelStatus);
-            if (tripFlag == 0) {//行程开始
+            /**
+             * 行程开始
+             */
+            if (tripFlag == 0) {
                 entity.setBeginTime(System.currentTimeMillis());
                 entity.setBeginLon(RandomUtil.getLonLat());
                 entity.setBeginLat(RandomUtil.getLonLat());
                 entity.setBeginSpeed(RandomUtil.getNum(0, 100));
-            } else {//行程结束
+            }
+            /**
+             * 行程结束
+             */
+            else {
                 entity.setBeginTime(System.currentTimeMillis());
                 entity.setBeginLon(RandomUtil.getLonLat());
                 entity.setBeginLat(RandomUtil.getLonLat());

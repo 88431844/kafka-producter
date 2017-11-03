@@ -15,15 +15,24 @@ public class PushPointRecordEntity extends KafkaCommand implements Serializable 
 
     private String carNumber;
 
-    private String ownerId;//车主id
+    /**
+     * 车主id
+     */
+    private String ownerId;
 
-    private String mainDriver;//主驾id
+    /**
+     * 主驾id
+     */
+    private String mainDriver;
 
     private String mainDriverName;
 
     private String mainDriverPhone;
 
-    private String subDriver;//副驾id
+    /**
+     * 副驾id
+     */
+    private String subDriver;
 
     private String subDriverName;
 
@@ -33,7 +42,10 @@ public class PushPointRecordEntity extends KafkaCommand implements Serializable 
 
     private String cityName;
 
-    private Integer inOut;//驶入或驶出，分别对应0和1
+    /**
+     * 驶入或驶出，分别对应0和1
+     */
+    private Integer inOut;
 
     private Long beginTime;
 
@@ -43,7 +55,10 @@ public class PushPointRecordEntity extends KafkaCommand implements Serializable 
 
     private Integer beginSpeed;
 
-    private Long startTime;//行程开始时间
+    /**
+     * 行程开始时间
+     */
+    private Long startTime;
 
     private Double instantOil;
 
