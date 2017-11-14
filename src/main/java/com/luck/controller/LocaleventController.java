@@ -1,9 +1,6 @@
 package com.luck.controller;
 
-import com.luck.dto.CommonRespondDto;
-import com.luck.dto.SendPointEventDto;
-import com.luck.dto.SendSpeedEventDto;
-import com.luck.dto.SendStatusEventDto;
+import com.luck.dto.*;
 import com.luck.service.TestLocalEventService;
 import com.luck.util.Const;
 import org.slf4j.Logger;
@@ -116,6 +113,35 @@ public class LocaleventController {
             commonRespondDto.setCode(Const.FAIL_CODE);
             commonRespondDto.setMsg(Const.FAIL_MSG);
             logger.error("LocaleventController sendStatus error");
+            e.printStackTrace();
+            return commonRespondDto;
+        }
+        return commonRespondDto;
+    }
+
+    /**
+     * 发送 急转弯、急加速、急减速
+     * @param
+     * @return
+     */
+    @RequestMapping("/sendUnormal")
+    @ResponseBody
+    public CommonRespondDto sendUnormal(@RequestBody SendUnormalEventDto sendUnormalEventDto){
+        CommonRespondDto commonRespondDto = new CommonRespondDto();
+        logger.info("LocaleventController sendUnormal request parm :{}",sendUnormalEventDto.toString());
+
+        testLocalEventService.setQINGQI_COMMAND(sendUnormalEventDto.getQINGQI_COMMAND());
+        testLocalEventService.setTerminalId(sendUnormalEventDto.getTerminalId());
+        testLocalEventService.setTopic(sendUnormalEventDto.getTopic());
+
+        try {
+            testLocalEventService.sendUnormal(sendUnormalEventDto);
+            commonRespondDto.setCode(Const.SUCCESS_CODE);
+            commonRespondDto.setMsg(Const.SUCCESS_MSG);
+        }catch (Exception e){
+            commonRespondDto.setCode(Const.FAIL_CODE);
+            commonRespondDto.setMsg(Const.FAIL_MSG);
+            logger.error("LocaleventController sendUnormal error");
             e.printStackTrace();
             return commonRespondDto;
         }

@@ -1,6 +1,7 @@
 package com.luck.service;
 
 import com.google.protobuf.ByteString;
+import com.luck.dto.SendUnormalEventDto;
 import com.luck.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,6 +97,55 @@ public class TestLocalEventService {
     }
 
     /**
+     * 推送 急转弯、急加速、急减速
+     */
+    public void sendUnormal(SendUnormalEventDto sendUnormalEventDto) throws Exception{
+        //创建pb
+        LCLocationData.LocationData.Builder builder = LCLocationData.LocationData.newBuilder();
+        //必填数据赋值
+        builder = getNeedPb(builder);
+        //附加报警信息
+        byte additionAlarmByte = processUnormalAlarm(sendUnormalEventDto);
+        byte[] additionAlarmByteArray = {0x00, 0x00, 0x00, 0x00, 0x00, additionAlarmByte, 0x00, 0x00};
+        ByteString byteString = ByteString.copyFrom(additionAlarmByteArray);
+        builder.setAdditionAlarm(byteString);
+        LCLocationData.LocationData taLocationData = builder.build();
+        //发送消息到kafka
+        send2Kafka(taLocationData,terminalId);
+        logger.info("TestLocalEventService sendUnormal ..............:{}", System.currentTimeMillis());
+    }
+
+    /**
+     * 处理附加报警 并转换为字节（急转弯、急加速、急减速）
+     * @param sendUnormalEventDto
+     * @return
+     */
+    private byte processUnormalAlarm(SendUnormalEventDto sendUnormalEventDto){
+        /**
+         * 0：无任何不正常情况
+         * 1: 急加速 rapidAcceleration;
+         * 2：急减速 rapidDeceleration;
+         * 3：急转弯 sharpTurning;
+         *
+         */
+        //急加速
+        if (1 == sendUnormalEventDto.getType()){
+            return 0x02;
+        }
+        //急减速
+        else  if (2 == sendUnormalEventDto.getType()){
+            return 0x04;
+        }
+        //急转弯
+        else  if (3 == sendUnormalEventDto.getType()){
+            return 0x08;
+        }
+        //啥也没有
+        else {
+            return 0x00;
+        }
+    }
+    /**
      * 填充必要pb结构
      * @param builder
      * @return
@@ -109,9 +159,10 @@ public class TestLocalEventService {
         builder.setDirection(0);
         builder.setReceiveDate(System.currentTimeMillis());
         builder.setIsPatch(false);
-        builder.setGpsDate(System.currentTimeMillis());
+        builder.setGpsDate(System.currentTimeMillis() / 1000);
 
-        ByteString byteString = ByteString.copyFrom("1999999999".getBytes());
+        byte[] additionAlarmByteArray = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+        ByteString byteString = ByteString.copyFrom(additionAlarmByteArray);
         builder.setAdditionAlarm(byteString);
         return  builder;
     }
@@ -128,6 +179,7 @@ public class TestLocalEventService {
 
         try {
             kafkaTemplate.send(topic,terminalId, JsonUtil.toJson(dataMap));
+            logger.info("---------sended kafak ,topic :{}",topic);
         }catch (Exception e){
             logger.error("send2Kafka error");
             e.printStackTrace();

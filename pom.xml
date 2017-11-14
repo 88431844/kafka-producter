@@ -64,6 +64,24 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+
+		<!--<resources>-->
+			<!--<resource>-->
+				<!--<directory>src/main/resources/lib</directory>-->
+				<!--<targetPath>classes/lib</targetPath>-->
+				<!--<includes>-->
+					<!--<include>TripProtocol-1.0-SNAPSHOT.jar</include>-->
+				<!--</includes>-->
+			<!--</resource>-->
+			<!--<resource>-->
+				<!--<directory>src/main/resources/lib</directory>-->
+				<!--<targetPath>classes/lib</targetPath>-->
+				<!--<includes>-->
+					<!--<include>LCProtocol.jar</include>-->
+				<!--</includes>-->
+			<!--</resource>-->
+
+		<!--</resources>-->
 	</build>
 
 </project>
