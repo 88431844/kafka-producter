@@ -126,7 +126,8 @@ public class TestLocalEventService {
          * 1: 急加速 rapidAcceleration;
          * 2：急减速 rapidDeceleration;
          * 3：急转弯 sharpTurning;
-         *
+         * 4：急加速+急转弯
+         * 5：急减速+急转弯
          */
         //急加速
         if (1 == sendUnormalEventDto.getType()){
@@ -139,6 +140,14 @@ public class TestLocalEventService {
         //急转弯
         else  if (3 == sendUnormalEventDto.getType()){
             return 0x08;
+        }
+        //急加速+急转弯
+        else  if (4 == sendUnormalEventDto.getType()){
+            return 0x0A;
+        }
+        //急减速+急转弯
+        else  if (5 == sendUnormalEventDto.getType()){
+            return 0x0C;
         }
         //啥也没有
         else {

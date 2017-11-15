@@ -10,6 +10,8 @@ public class SendUnormalEventDto extends EventBaseDto {
      * 1: 急加速
      * 2：急减速
      * 3：急转弯
+     * 4：急加速+急转弯
+     * 5：急减速+急转弯
      */
     private Integer type = 0;
 
@@ -17,6 +19,7 @@ public class SendUnormalEventDto extends EventBaseDto {
     public String toString() {
         return "SendUnormalEventDto{" +
                 "type=" + type +
+                super.toString()+
                 '}';
     }
 
