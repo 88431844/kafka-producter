@@ -4,7 +4,7 @@ package com.luck.dto;
  * @Author miracle
  * @Date 2017/11/1 0001 16:41
  */
-public class EventBaseDto {
+public class EventBaseDto extends baseDto{
 
     private String QINGQI_COMMAND = "3002";
     private String topic = "jfz_ZHposcan_pkt";
@@ -16,6 +16,7 @@ public class EventBaseDto {
                 "QINGQI_COMMAND='" + QINGQI_COMMAND + '\'' +
                 ", topic='" + topic + '\'' +
                 ", terminalId='" + terminalId + '\'' +
+                super.toString() +
                 '}';
     }
 

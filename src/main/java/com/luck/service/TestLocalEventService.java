@@ -1,6 +1,7 @@
 package com.luck.service;
 
 import com.google.protobuf.ByteString;
+import com.luck.dto.SendSpeedEventDto;
 import com.luck.dto.SendUnormalEventDto;
 import com.luck.util.JsonUtil;
 import org.slf4j.Logger;
@@ -51,15 +52,18 @@ public class TestLocalEventService {
     /**
      * 推送localevent 超速报警
      */
-    public void sendSpeed() throws Exception{
+    public void sendSpeed(SendSpeedEventDto sendSpeedEventDto) throws Exception{
+        this.setQINGQI_COMMAND(sendSpeedEventDto.getQINGQI_COMMAND());
+        this.setTopic(sendSpeedEventDto.getTopic());
+
         //创建pb
         LCLocationData.LocationData.Builder builder = LCLocationData.LocationData.newBuilder();
         //必填数据赋值
         builder = getNeedPb(builder);
-        builder.setSpeed(speed);
+        builder.setSpeed(sendSpeedEventDto.getSpeed());
         LCLocationData.LocationData taLocationData = builder.build();
         //发送消息到kafka
-        send2Kafka(taLocationData,terminalId);
+        send2Kafka(taLocationData,sendSpeedEventDto.getTerminalId());
         logger.info("TestLocalEventService sendSpeed ..............:{}",System.currentTimeMillis());
     }
     /**

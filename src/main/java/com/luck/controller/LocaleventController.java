@@ -36,13 +36,10 @@ public class LocaleventController {
         CommonRespondDto commonRespondDto = new CommonRespondDto();
         logger.info("LocaleventController sendSpeed request parm :{}", sendSpeedEventDto.toString());
 
-        testLocalEventService.setQINGQI_COMMAND(sendSpeedEventDto.getQINGQI_COMMAND());
-        testLocalEventService.setSpeed(sendSpeedEventDto.getSpeed());
-        testLocalEventService.setTerminalId(sendSpeedEventDto.getTerminalId());
-        testLocalEventService.setTopic(sendSpeedEventDto.getTopic());
+
 
         try {
-            testLocalEventService.sendSpeed();
+            testLocalEventService.sendSpeed(sendSpeedEventDto);
             commonRespondDto.setCode(Const.SUCCESS_CODE);
             commonRespondDto.setMsg(Const.SUCCESS_MSG);
         }catch (Exception e){

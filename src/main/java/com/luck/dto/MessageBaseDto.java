@@ -4,7 +4,7 @@ package com.luck.dto;
  * @Author miracle
  * @Date 2017/11/1 0001 17:28
  */
-public class MessageBaseDto {
+public class MessageBaseDto extends baseDto {
     private Long sleepTime = 500L;
     private String mainDriverId = "2d7206379f3741548c0d17a9999519bf";
 
@@ -13,6 +13,7 @@ public class MessageBaseDto {
         return "MessageBaseDto{" +
                 "sleepTime=" + sleepTime +
                 ", mainDriverId='" + mainDriverId + '\'' +
+                super.toString() +
                 '}';
     }
 
