@@ -34,6 +34,7 @@ public class SimplyController {
         String str = dto.getSendStr();
         if (null != topic && null != str && !"".equals(topic) && !"".equals(str)){
             kafkaTemplate.send(topic,str);
+            logger.info("sendString send .................{}",System.currentTimeMillis());
         }
         return commonRespondDto;
     }
